@@ -19,66 +19,29 @@ export default function TextForm(props) {
     }
 
     // text to morse code 
-    const morseCode = {
-        "A": ".-",
-        "B": "-...",
-        "C": "-.-.",
-        "D": "-..",
-        "E": ".",
-        "F": "..-.",
-        "G": "--.",
-        "H": "....",
-        "I": "..",
-        "J": ".---",
-        "K": "-.-",
-        "L": ".-..",
-        "M": "--",
-        "N": "-.",
-        "O": "---",
-        "P": ".--.",
-        "Q": "--.-",
-        "R": ".-.",
-        "S": "...",
-        "T": "-",
-        "U": "..-",
-        "W": ".--",
-        "X": "-..-",
-        "Y": "-.--",
-        "Z": "--.."
-    }
-    const convertToMorse = (str) => {
-        return str.toUpperCase().split("").map(el => {
-            return morseCode[el] ? morseCode[el] : el;
-        }).join("");
+
+    const convertToBinary = (str) => {
+        return str.split('').map(function (char) {
+            return char.charCodeAt(0).toString(2);
+        }).join(' ');
     };
+    const convertBtoT = (str) => {
+        return str.split(/\s/).map(function (val) {
+            return String.fromCharCode(parseInt(val, 2));
+        }).join("");
+    }
 
 
-    const HandleMorseClick = () => {
-        let nText = convertToMorse(text)
+    const HandleTBClick = () => {
+        let nText = convertToBinary(text)
         setText(nText)
     }
 
-    var MORSE_CODE = { ".-": "a", "-...": "b", "-.-.": "c", "-..": "d", ".": "e", "..-.": "f", "--.": "g", "....": "h", "..": "i", ".---": "j", "-.-": "k", ".-..": "l", "--": "m", "-.": "n", "---": "o", ".--.": "p", "--.-": "q", ".-.": "r", "...": "s", "-": "t", "..-": "u", "...-": "v", ".--": "w", "-..-": "x", "-.--": "y", "--..": "z", ".----": "1", "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6", "--...": "7", "---..": "8", "----.": "9", "-----": "0", "|": " " };
 
-    var decodeMorse = function (morseCode) {
-        var words = (morseCode).split('  ');
-        var letters = words.map((w) => w.split(' '));
-        var decoded = [];
 
-        for (var i = 0; i < letters.length; i++) {
-            decoded[i] = [];
-            for (var x = 0; x < letters[i].length; x++) {
-                if (MORSE_CODE[letters[i][x]]) {
-                    decoded[i].push(MORSE_CODE[letters[i][x]]);
-                }
-            }
-        }
 
-        return decoded.map(arr => arr.join('')).join(' ');
-    }
-
-    const HandleNorseClick = () => {
-        let nText = decodeMorse(text)
+    const HandleBTClick = () => {
+        let nText = convertBtoT(text)
         setText(nText)
     }
 
@@ -141,8 +104,8 @@ export default function TextForm(props) {
                     </div>
                     <button className="btn btn-primary mx-3" onClick={HandleUpClick}>Convert to UpperCase</button>
                     <button className="btn btn-primary mx-3" onClick={HandleLowClick}  >Convert to Lowercase</button>
-                    <button className="btn btn-primary mx-3" onClick={HandleMorseClick}  >Convert to morse code</button>
-                    <button className="btn btn-primary mx-3" onClick={HandleNorseClick}  >Convert morse to text code</button>
+                    <button className="btn btn-primary mx-3" onClick={HandleTBClick}  >Convert to Binary</button>
+                    <button className="btn btn-primary mx-3" onClick={HandleBTClick}  >Convert to Text</button>
                     <button className="btn btn-primary mx-3" onClick={handleCopy}  >Copy Text</button>
 
                     <button className="btn btn-primary mx-3" onClick={removeExtraSpace}  >remove extra spaces</button>
