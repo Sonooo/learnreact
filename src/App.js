@@ -50,7 +50,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} key={new Date()} />
+        <Navbar title="Text Transform" mode={mode} toggleMode={toggleMode} key={new Date()} />
         <Alert alert={alert} />
         <div className="container my-3">
           <Switch>
